@@ -131,7 +131,12 @@ class Springer:
         """journal (journal_long):
             - 148 (Journal of Population Economics)
             - 181 (Empirical Economics)
+            - 182 (International Journal of Game Theory)
+            - 191 (Journal of Evolutionary Economics)
             - 199 (Economic Theory)
+            - 780 (Finance and Stochastics)
+            - 10290 (Review of World Economics)
+            - 10551 (Journal of Business Ethics)
             - 10640 (Environmental & Resource Economics)
             - 10683 (Experimental Economics)
             - 10693 (Journal of Financial Services Research)
@@ -141,32 +146,48 @@ class Springer:
             - 11123 (Journal of Productivity Analysis)
             - 11127 (Public Choice)
             - 11129 (Quantitative Marketing and Economics)
+            - 11146 (The Journal of Real Estate Finance and Economics)
+            - 11149 (Journal of Regulatory Economics)
             - 11166 (Journal of Risk and Uncertainty)
             - 11187 (Small Business Economics)
+            - 40174 (IZA Journal of European Labor Studies)
             - 40881 (Journal of the Economic Science Association)
         """
 
-        url = f"https://link.springer.com/journal/{journal}/volumes-and-issues"
-        html = scrape.get_html(url=url)
-        issue = html.select("ul.u-list-reset:nth-child(2)")[0]
-        issue = [x["href"] for x in issue.find_all("a")]
-        issue = [f"https://link.springer.com{x}" for x in issue]
+        try:
+            url = f"https://link.springer.com/journal/{journal}/volumes-and-issues"
+            html = scrape.get_html(url=url)
+            issue = html.select("ul.u-list-reset:nth-child(2)")[0]
+            issue = [x["href"] for x in issue.find_all("a")]
+            issue = [f"https://link.springer.com{x}" for x in issue]
 
-        return issue
+            return issue
+        
+        except IndexError:
+            pass
     
 
     def get_article(self, issue: str):
-        html = scrape.get_html(url=issue)
-        article = [x["href"] for x in html.select("ol.u-list-reset")[0].find_all("a")]
-        
-        return article
+        try:
+            html = scrape.get_html(url=issue)
+            article = [x["href"] for x in html.select("ol.u-list-reset")[0].find_all("a")]
+            
+            return article
+
+        except AttributeError:
+            pass
     
 
     def get_jel(self, article: str, journal_long: str):
         """journal (journal_long):
             - 148 (Journal of Population Economics)
             - 181 (Empirical Economics)
+            - 182 (International Journal of Game Theory)
+            - 191 (Journal of Evolutionary Economics)
             - 199 (Economic Theory)
+            - 780 (Finance and Stochastics)
+            - 10290 (Review of World Economics)
+            - 10551 (Journal of Business Ethics)
             - 10640 (Environmental & Resource Economics)
             - 10683 (Experimental Economics)
             - 10693 (Journal of Financial Services Research)
@@ -176,8 +197,11 @@ class Springer:
             - 11123 (Journal of Productivity Analysis)
             - 11127 (Public Choice)
             - 11129 (Quantitative Marketing and Economics)
+            - 11146 (The Journal of Real Estate Finance and Economics)
+            - 11149 (Journal of Regulatory Economics)
             - 11166 (Journal of Risk and Uncertainty)
             - 11187 (Small Business Economics)
+            - 40174 (IZA Journal of European Labor Studies)
             - 40881 (Journal of the Economic Science Association)
         """
 
@@ -207,7 +231,12 @@ class Springer:
         """journal (journal_long):
             - 148 (Journal of Population Economics)
             - 181 (Empirical Economics)
+            - 182 (International Journal of Game Theory)
+            - 191 (Journal of Evolutionary Economics)
             - 199 (Economic Theory)
+            - 780 (Finance and Stochastics)
+            - 10290 (Review of World Economics)
+            - 10551 (Journal of Business Ethics)
             - 10640 (Environmental & Resource Economics)
             - 10683 (Experimental Economics)
             - 10693 (Journal of Financial Services Research)
@@ -217,8 +246,11 @@ class Springer:
             - 11123 (Journal of Productivity Analysis)
             - 11127 (Public Choice)
             - 11129 (Quantitative Marketing and Economics)
+            - 11146 (The Journal of Real Estate Finance and Economics)
+            - 11149 (Journal of Regulatory Economics)
             - 11166 (Journal of Risk and Uncertainty)
             - 11187 (Small Business Economics)
+            - 40174 (IZA Journal of European Labor Studies)
             - 40881 (Journal of the Economic Science Association)
         """
 

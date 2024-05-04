@@ -12,3 +12,10 @@ def get_html(url):
     
     except requests.exceptions.ConnectionError:
         pass
+
+
+def scrape_by_issue(journal_class: type, path: str, journal: str, journal_long: str):
+    issue = journal_class.get_issue(journal)
+    for i in issue:
+        article = journal_class.get_article(i)
+        journal_class.save_data(i, article, path, journal, journal_long)
